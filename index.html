@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+
+        <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/bootstrap-responsive.min.css">
+        <style>
+            .container{padding-top: 20px;}
+            .container > div {margin: 0 0 20px 0;}
+        </style>
+        <style media="only screen and (min-width: 450px)">
+            .dyn-select {display: block; min-height: 20px;
+                padding: 19px;
+                margin-bottom: 20px;
+                background-color: #f5f5f5;
+                border: 1px solid #e3e3e3;
+                -webkit-border-radius: 4px;
+                -moz-border-radius: 4px;
+                border-radius: 4px;
+                -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+                -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+                box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05); overflow-x: scroll;}
+            .dyn-select > a{display: none;}
+            .dyn-select-items {position: relative; display: block; padding: 0; margin-top: 0; background: transparent;box-shadow: none;border: none;}
+            .dyn-select-items > li {display: block;float: left; font-size: 1.12em; margin: 0 10px;}
+            .dyn-select-items > li > a {display: block;cursor: pointer;border-radius: 4px; padding: 20px; background-color: #fff; border: 1px solid #e3e3e3;}
+            .active{color: #ffffff; text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25); background-color: #3a87ad; border-radius: 5px; cursor: auto;}
+            .active > a {border-radius: 0; border: none;}
+        </style>
+        <script src="js/vendor/modernizr-2.6.2.min.js"></script>
+    </head>
+    <body>
+    <div class="container">
+        <div class="row-fluid">
+            <div class="span6 offset3">
+            <div class="btn-group dyn-select">
+                <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+                <span data-bind="text: selectedItem"></span>
+                <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu dyn-select-items" data-bind="foreach: items">
+                    <li data-bind="css:{'active': $parent.selectedItem() === $data}"><a data-bind="text: $data, click: $parent.selectItem"></a></li>
+                </ul>
+            </div>
+            </div>
+        </div>
+        <div class="row-fluid">
+            <div class="span6 offset3">
+            <div class="hero-unit span12">
+                <p>You selected:</p>
+                <h1 data-bind="text: selectedItem"></h1>
+            </div>
+                </div>
+        </div>
+
+    </div>
+        <script src="js/vendor/jquery-1.9.0.min.js"></script>
+        <script src="js/vendor/bootstrap.min.js"></script>
+        <script src="js/vendor/knockout-2.2.1.js"></script>
+
+        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+        <script>
+            function viewModel(){
+                var self = this;
+                self.items = ["Item 1", "Item 2", "Item 3", "Item 5", "Item 6", "Item 7", "Item 8", "Item 9", "Item 10"];
+                self.selectedItem = ko.observable("Please Select");
+                self.selectItem = function(data){
+                    self.selectedItem(data);
+                };
+            }
+
+            ko.applyBindings(new viewModel());
+
+        </script>
+    </body>
+</html>
